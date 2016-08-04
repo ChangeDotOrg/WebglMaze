@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<img id = "brickImage" src = "brickWoodWall.gif" hidden></img>
+<title>
+CS435,Project#7,Hampton Brewer</title>
+<p> </p>
+<!--
+<button id = "Button1">Increase Z</button>
+<button id = "Button2">Decrease Z</button>
+<button id = "Button3">Increase R</button>
+<button id = "Button4">Decrease R</button>
+-->
+<p> </p>
+<!--
+<button id = "Button5">Increase theta</button>
+<button id = "Button6">Decrease theta</button>
+
+<div>
+
+<button id = "Button7">Increase phi</button>
+<button id = "Button8">Decrease phi</button>-->
+<h2>CS435, Project#7, Hampton Brewer</h2>
+<p> </p>
+<div>
+<!--  
+<button id = "btnMove">move</button>
+-->
+</div>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+attribute  vec2 vTexCoord;
+
+varying vec4 fColor;
+varying vec2 fTexCoord;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+void main() 
+{
+    gl_Position = projectionMatrix*modelViewMatrix*vPosition;
+    fColor = vColor;
+	fTexCoord = vTexCoord;
+} 
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying vec4 fColor;
+varying  vec2 fTexCoord;
+
+uniform sampler2D texture;
+void
+main()
+{
+    gl_FragColor = fColor * texture2D( texture, fTexCoord );;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="proj7.js"></script>
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<p>
+<h3>Instructions:</h3>
+It is a simple maze.<br>
+The goal is to make it to the big room in the maze.<br>
+1) Use keys w,a,s,d to move.<br>
+2) W key moves you forward.<br>
+3) D key moves you backwards.<br>
+4) A key turns left.<br>
+5) S key turns right.<br>
+FYI the TextMapping2D does not work in Chrome,<br>
+even the examples dont work, I used firefox or edge to test.
+</p>
+
+
+</body>
+</html>
